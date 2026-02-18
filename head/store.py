@@ -1,4 +1,4 @@
-from head.utility.yt_transcription import transcription
+from head.utility.yt_transcription import Transcription
 from langchain_openai import OpenAIEmbeddings, ChatOpenAI
 from langchain_community.vectorstores import FAISS
 from langchain_core.prompts import PromptTemplate
@@ -11,7 +11,7 @@ load_dotenv()
 class vector_store:
     def __init__(self, url):
         self.url = url
-        self.chunks = transcription(self.url).transcript()
+        self.chunks = Transcription(self.url).transcript()
 
     def my_invoke(self, question):
         self.question = question
