@@ -1,6 +1,6 @@
 from .yt_url_parser import yt_parser
 from youtube_transcript_api import YouTubeTranscriptApi, TranscriptsDisabled
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 class transcription():
     def __init__(self, url):

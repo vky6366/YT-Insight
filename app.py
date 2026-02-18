@@ -1,8 +1,8 @@
 import streamlit as st
 from head.store import vector_store
 # Page title
-st.set_page_config(page_title="YouTube Transcript App", layout="centered")
-st.title("📺 YouTube Transcript Viewer")
+st.set_page_config(page_title="YT Insight", layout="centered")
+st.title("📺 YouTube Insight")
 
 # Input section
 yt_url = st.text_input("Enter YouTube Video URL", placeholder="https://www.youtube.com/watch?v=...")
