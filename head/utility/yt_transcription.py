@@ -20,35 +20,26 @@ class Transcription:
             return "Invalid or missing YouTube video ID."
 
         try:
-            transcripts = YouTubeTranscriptApi.list_transcripts(self.code)
-            transcript_lang = transcripts.find_transcript(['en'])
-            transcript_list = transcript_lang.fetch()
+            ytt_api = YouTubeTranscriptApi()
+            fetched_transcript = ytt_api.fetch(self.code)
 
-            # Convert to plain text
-            transcript_text = " ".join(
-                chunk.text for chunk in transcript_list
-            )
+            documents = []
 
-            splitter = RecursiveCharacterTextSplitter(
-                chunk_size=1000,
-                chunk_overlap=200
-            )
-
-            # chunks = splitter.split_text(transcript_text)
-
-            # return chunks
-
-            texts = splitter.split_text(transcript_text)
-
-            documents = [
-                Document(
-                    page_content=text,
-                    metadata={"source": self.url}
+            for snippet in fetched_transcript:
+                documents.append(
+                    Document(
+                        page_content=snippet.text,
+                        metadata={
+                            "source": self.url,
+                            "start": snippet.start,
+                            "duration": snippet.duration,
+                            "video_id": self.code,
+                            "language": fetched_transcript.language_code
+                        }
+                    )
                 )
-                for text in texts
-            ]
-            return documents
 
+            return documents
 
         except TranscriptsDisabled:
             return "No captions available for this video."
@@ -58,3 +49,4 @@ class Transcription:
 
         except VideoUnavailable:
             return "Video unavailable or private."
+
