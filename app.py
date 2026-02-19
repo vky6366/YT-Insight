@@ -1,5 +1,10 @@
 import streamlit as st
 from head.store import VectorStore
+
+import os
+api_key = os.getenv("YOUTUBE_API_KEY")
+api_key = os.getenv("OPENAI_API_KEY")
+
 # Page title
 st.set_page_config(page_title="YT Insight", layout="centered")
 st.title("📺 YouTube Insight")
