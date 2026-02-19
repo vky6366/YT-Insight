@@ -1,5 +1,5 @@
 import streamlit as st
-from head.store import VectorStore
+from head.store import vector_store
 
 import os
 api_key = os.getenv("YOUTUBE_API_KEY")
@@ -12,7 +12,7 @@ st.title("📺 YouTube Insight")
 # Input section
 yt_url = st.text_input("Enter YouTube Video URL", placeholder="https://www.youtube.com/watch?v=...")
 question = st.text_input("Enter your question", placeholder="Eg: Generate a summary")
-vs = VectorStore(yt_url)
+vs = vector_store(yt_url)
 # Display output section only if URL is entered
 if yt_url:
     st.markdown("---")
