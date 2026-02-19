@@ -13,6 +13,7 @@ class VectorStore:
         self.url = url
         self.chunks = Transcription(self.url).transcript()
 
+
         if isinstance(self.chunks, str):
             self.error = self.chunks
             self.retriever = None
