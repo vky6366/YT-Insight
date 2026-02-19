@@ -1,18 +1,13 @@
 import streamlit as st
-from head.store import VectorStore
-
-import os
-api_key = os.getenv("YOUTUBE_API_KEY")
-api_key = os.getenv("OPENAI_API_KEY")
-
+from head.store import vector_store
 # Page title
-st.set_page_config(page_title="YT Insight", layout="centered")
-st.title("📺 YouTube Insight")
+st.set_page_config(page_title="YouTube Transcript App", layout="centered")
+st.title("📺 YouTube Transcript Viewer")
 
 # Input section
 yt_url = st.text_input("Enter YouTube Video URL", placeholder="https://www.youtube.com/watch?v=...")
 question = st.text_input("Enter your question", placeholder="Eg: Generate a summary")
-vs = VectorStore(yt_url)
+vs = vector_store(yt_url)
 # Display output section only if URL is entered
 if yt_url:
     st.markdown("---")
